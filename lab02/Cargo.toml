@@ -1,0 +1,31 @@
+[package]
+name = "lab02"
+version = "0.1.0"
+edition = "2021"
+authors = ["Grégoire Guyot <gregoire.guyot@heig-vd.ch>", "Pablo Saez <pablo.saez@heig-vd.ch>"]
+
+[dependencies]
+webauthn-rs = "0.5"
+async-trait = "0.1"
+anyhow = "1.0.75"
+axum = {version = "0.7.1", features = ["json", "macros", "multipart"]}
+env_logger = "0.11.5"
+handlebars = { version = "4.5.0", features = ["dir_source"] }
+tower-sessions = "0.7.0"
+tower = "0.5.1"
+http = "1.0.0"
+log = "0.4.20"
+once_cell = "1.18.0"
+serde = {version = "1.0.193", features = ["derive"]}
+serde_json = "1.0.108"
+tokio = {version = "1.34.0", features = ["full"]}
+tower-http = { version = "0.6.2", features = ["cors"] }
+uuid = { version = "1.6.1", features = ["v4"] }
+dotenv = "0.15.0"
+url = "2.5.3"
+serde_yaml = "0.9.34-deprecated"
+regex = "1.11.1"
+mime = "0.3.17"
+image = "0.25.5"
+validator = "0.19.0"
+
