@@ -139,12 +139,14 @@ pub async fn register_complete(
             create(email, first_name, last_name)
                 .map_err(|_| (StatusCode::INTERNAL_SERVER_ERROR, "Failed to create user"))?;
         }
-        (true, Ok(true)) => { // TODO WSI : Régler pb et test images
-            let passkey = CREDENTIAL_STORE.read().await.get(email).unwrap().clone();
-            set_passkey(email, passkey)
-                .map_err(|e| (StatusCode::INTERNAL_SERVER_ERROR, e.to_string()))?;
+        (true, Ok(true)) => {
+            // En vrai ici il faut modifer le userName et le LastName du user qui a recover
+            // Pas possible avec les outils fournit car la foncter get nous renvoi une copie
+            // du user. Toutefois, la passkey est bel est bien modifié. Le setPasskey est
+            // appelé dans la fonction `complete_registration(...)` juste en desous.
+            create(email, first_name, last_name)
+                .map_err(|_| (StatusCode::INTERNAL_SERVER_ERROR, "Failed to create user"))?;
         },
-
         (_, _) => {
             return Err((
                 StatusCode::INTERNAL_SERVER_ERROR,
@@ -171,7 +173,7 @@ pub async fn register_complete(
             email,
             "Verifier votre compte",
             &format!(
-                "Bienvenu! Veuillez verifier votre compte en clickant sur le lien: {}\n\n\
+                "Bienvenu! Veuillez verifier votre compte en clickant sur le lien: {}\n
              Si vous n'etes pas à l'origine de l'action, ignorez cette email.",
                 verification_link
             ),
